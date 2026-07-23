@@ -1,22 +1,53 @@
 # Youth Earning Potential — Rwanda
 
-**Mission:** Reduce youth unemployment in Rwanda by identifying which factors — education,
-location, sector — most affect earning potential, so that skills and opportunity-access
-interventions can be targeted where they matter most. This model predicts hourly cash income
-for employed Rwandan youth (16–30) using the **NISR Rwanda Labour Force Survey 2021**.
+Rwanda's youth face high unemployment and underemployment, often due to skills and
+location mismatches with the labour market. This project predicts hourly cash income
+for employed Rwandan youth (16–30) from education, sector, and location, using the
+**NISR Rwanda Labour Force Survey 2021** — to help target skills and opportunity-access
+interventions where they matter most.
 
-## API
+## API Endpoint
 
-Once deployed, the Swagger UI (interactive API docs) will be publicly available at:
+**https://linear-regression-model-kkrq.onrender.com/docs**
 
-**https://linear-regression-model-kkrq.onrender.com/docs** 
+Public Swagger UI — test `POST /predict` directly from that page (no localhost required).
 
-### Endpoints
+> Hosted on Render's free tier: it spins down after ~15 minutes idle, so the first
+> request after a pause can take 30–60 seconds to wake up. This is expected.
+
+## Video Demo
+
+**[Youtube link]**
+
+## Running the Mobile App
+
+```bash
+cd summative/FlutterApp
+flutter pub get
+flutter run
+```
+
+Select a connected device or emulator when prompted. The app already points at the
+live API above (`lib/main.dart` → `apiBaseUrl`), so no configuration is needed —
+just run it and predict.
+
+> **If running as a web build** (`flutter run -d chrome`), you must serve it on
+> **port 8080**, since that's the origin explicitly allowed by the API's CORS
+> config (`http://localhost:8080` in `ALLOWED_ORIGINS`). Run it with:
+> ```bash
+> flutter run -d chrome --web-port 8080
+> ```
+> Any other port will be blocked by the browser with a CORS error. This restriction
+> does not apply to native Android/iOS builds — only to running Flutter in a browser.
+
+---
+
+## Endpoints
 - `GET /` — health check
 - `POST /predict` — predict hourly & monthly income given a youth's profile
 - `POST /retrain` — upload a CSV of new labour-force-style rows to retrain the model on combined data
 
-## Running locally
+## Running the API locally
 
 ```bash
 # from the repo root (where this README and pyproject.toml live)
@@ -26,7 +57,6 @@ uv run --project ../.. uvicorn prediction:app --reload
 ```
 
 Then open http://127.0.0.1:8000/docs in your browser.
-
 
 ## Project structure
 
