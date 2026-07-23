@@ -17,7 +17,7 @@ Public Swagger UI — test `POST /predict` directly from that page (no localhost
 
 ## Video Demo
 
-**[Youtube link]**
+**[Youtube link](https://youtu.be/AO0QTkf6FgM)**
 
 ## Running the Mobile App
 
